@@ -42,6 +42,23 @@ class Api::TeachersController < ApplicationController
     @teacher.destroy
   end
 
+  def register
+    @teacher = Teacher.where(email: teacher_register_params[:teacher]).take
+    @students = Student.where(email: teacher_register_params[:students]).all
+    @teacher.register_students(@students)
+  end
+
+  def commonstudents
+    @teachers = Teacher.where(email: collect_teachers_from_query_string).all
+    @students = Teacher.get_all_students(@teachers)
+    render json: @students
+  end
+
+  def suspend
+    @student = Student.where(email: teacher_suspend_params).take
+    @student.update_attribute(:is_suspended, 1)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
@@ -51,5 +68,23 @@ class Api::TeachersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
       params.permit(:email)
+    end
+
+    def teacher_register_params
+      params.require(:teacher).permit(students:[])
+    end
+
+    def teacher_commonstudents_params
+      params.require(teacher:[])
+    end
+
+    def teacher_suspend_params
+      params.require(:student)
+    end
+
+    def collect_teachers_from_query_string
+      current_query_string = URI(request.url).query
+      query_params = URI::decode_www_form(current_query_string)
+      teachers_array = query_params.select { |pair| pair[0] == "teacher" }.collect { |pair| pair[1] }
     end
 end
