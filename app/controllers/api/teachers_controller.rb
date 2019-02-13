@@ -1,5 +1,6 @@
-class Api::V1::TeachersController < ApplicationController
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+class Api::TeachersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  before_action :set_teacher, only: [:show, :update, :destroy]
 
   # GET /teachers
   # GET /teachers.json
@@ -14,21 +15,12 @@ class Api::V1::TeachersController < ApplicationController
     render json: @teacher
   end
 
-  # GET /teachers/new
-  def new
-    @teacher = Teacher.new
-  end
-
-  # GET /teachers/1/edit
-  def edit
-  end
-
   # POST /teachers
   # POST /teachers.json
   def create
     @teacher = Teacher.new(teacher_params)
     if @teacher.save
-      render json: @teacher, status: :created, location: api_v1_teacher_url(@teacher)
+      render json: @teacher, status: :created
     else
       render json: @teacher.errors, status: :unprocessable_entity
     end
@@ -58,6 +50,6 @@ class Api::V1::TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:title)
+      params.permit(:email)
     end
 end

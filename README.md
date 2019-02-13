@@ -17,7 +17,8 @@ ruby 2.3.7p456
 ```
 
 **MySQL**
-*Log into MySQL terminal
+
+*Log into MySQL terminal*
 ```
 mysql> SELECT VERSION();
 +-----------+
