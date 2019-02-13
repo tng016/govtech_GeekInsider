@@ -1,6 +1,9 @@
 class Api::TeachersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_teacher, only: [:show, :update, :destroy]
+  rescue_from Exception, :with => :error_response
+  # rescue_from ActiveRecord::RecordNotFound, with: :error_response
+  # rescue_from Mysql2::Error, with: :error_response
 
   # GET /teachers
   # GET /teachers.json
@@ -43,8 +46,8 @@ class Api::TeachersController < ApplicationController
   end
 
   def register
-    @teacher = Teacher.where(email: teacher_register_params[0]).take
-    @students = Student.where(email: teacher_register_params[1]).all
+    @teacher = Teacher.where(email: params[:teacher]).take
+    @students = Student.where(email: params[:students]).all
     @teacher.register_students(@students)
   end
 
@@ -55,17 +58,22 @@ class Api::TeachersController < ApplicationController
   end
 
   def suspend
-    @student = Student.where(email: teacher_suspend_params).take
+    @student = Student.where(email: params[:student]).take
     @student.update_attribute(:is_suspended, 1)
   end
 
   def notifications
-    @teacher = Teacher.where(email: teacher_notification_params[0]).take
-    @receipients = @teacher.get_mailing_list(teacher_notification_params[1])
+    @teacher = Teacher.where(email: params[:teacher]).take
+    @receipients = @teacher.get_mailing_list(params[:notification])
     render json: {:receipients => @receipients.collect{|receipient| receipient.email}}
   end
 
   private
+    #returns JSON error message
+    def error_response(exception)
+      render json: { message: exception.message }, status: :bad_request
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
@@ -73,23 +81,7 @@ class Api::TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.permit(:email)
-    end
-
-    def teacher_register_params
-      params.require([:teacher,:students])
-    end
-
-    def teacher_commonstudents_params
-      params.require(teacher:[])
-    end
-
-    def teacher_suspend_params
-      params.require(:student)
-    end
-
-    def teacher_notification_params
-      params.require([:teacher,:notification])
+      params.require(:teacher).permit(:email)
     end
 
     def collect_teachers_from_query_string

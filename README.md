@@ -18,7 +18,7 @@ ruby 2.3.7p456
 
 **MySQL**
 
-*Log into MySQL terminal*
+Log into MySQL terminal
 ```
 mysql> SELECT VERSION();
 +-----------+
@@ -28,26 +28,46 @@ mysql> SELECT VERSION();
 +-----------+
 ```
 
+**A good code editor of your choice**
+Mine is [Atom](https://atom.io/)
+
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+How to get a development env running
 
-Say what the step will be
-
+#### 1) Clone GitHub repo
 ```
-export POSTGRES_PASSWORD='password'
-password: <%= ENV['POSTGRES_PASSWORD'] %>
-
-rake db:create
+git clone https://github.com/tng016/govtech_GeekInsider.git
 ```
 
-And repeat
-
+#### 2) Install Gems
 ```
-until finished
+bundle install
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+#### 3) Store your MySQL root password as a env variable
+```
+export MYSQL_PASSWORD='password'
+```
+
+#### 4) Create MySQL databases
+```
+rails db:create
+```
+
+#### 5) Migrate schema onto databases + seed the database
+```
+rails db:reset
+```
+
+#### 6) Start your rails local server
+```
+rails s
+```
+
+#### 7) Open your internet browser to [http://localhost:3000/api/students/](http://localhost:3000/api/students/)
+You should see a JSON of students
+```[{"id":1,"email":"studentjon@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":2,"email":"studenthon@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":3,"email":"commonstudent1@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":4,"email":"commonstudent2@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":5,"email":"studentmary@example.com","is_suspended":true,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:32:16.000Z"},{"id":6,"email":"studentbob@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":7,"email":"studentagnes@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":8,"email":"studentmiche@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"}]```
 
 ## Running the tests
 
@@ -73,11 +93,6 @@ Give an example
 
 Add additional notes about how to deploy this on a live system
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Possible Bugs
 
@@ -89,29 +104,4 @@ Check out [this stackoverflow page](https://stackoverflow.com/questions/51264240
 
 ## Authors
 
-* **Ng Tze Yang**
-
-
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+**Ng Tze Yang**

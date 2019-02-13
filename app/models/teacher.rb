@@ -1,5 +1,7 @@
 class Teacher < ApplicationRecord
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email address" }
   has_and_belongs_to_many :students
+
 
   def register_students(students)
     students.each do |student|
