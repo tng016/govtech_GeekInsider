@@ -43,20 +43,26 @@ class Api::TeachersController < ApplicationController
   end
 
   def register
-    @teacher = Teacher.where(email: teacher_register_params[:teacher]).take
-    @students = Student.where(email: teacher_register_params[:students]).all
+    @teacher = Teacher.where(email: teacher_register_params[0]).take
+    @students = Student.where(email: teacher_register_params[1]).all
     @teacher.register_students(@students)
   end
 
   def commonstudents
     @teachers = Teacher.where(email: collect_teachers_from_query_string).all
     @students = Teacher.get_all_students(@teachers)
-    render json: @students
+    render json: {:students => @students.collect{|student| student.email}}
   end
 
   def suspend
     @student = Student.where(email: teacher_suspend_params).take
     @student.update_attribute(:is_suspended, 1)
+  end
+
+  def notifications
+    @teacher = Teacher.where(email: teacher_notification_params[0]).take
+    @receipients = @teacher.get_mailing_list(teacher_notification_params[1])
+    render json: {:receipients => @receipients.collect{|receipient| receipient.email}}
   end
 
   private
@@ -71,7 +77,7 @@ class Api::TeachersController < ApplicationController
     end
 
     def teacher_register_params
-      params.require(:teacher).permit(students:[])
+      params.require([:teacher,:students])
     end
 
     def teacher_commonstudents_params
@@ -80,6 +86,10 @@ class Api::TeachersController < ApplicationController
 
     def teacher_suspend_params
       params.require(:student)
+    end
+
+    def teacher_notification_params
+      params.require([:teacher,:notification])
     end
 
     def collect_teachers_from_query_string
