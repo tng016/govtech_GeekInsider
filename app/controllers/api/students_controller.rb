@@ -1,6 +1,7 @@
 class Api::StudentsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_student, only: [:show, :update, :destroy]
+  rescue_from Exception, :with => :error_response
 
   # GET /students
   # GET /students.json
@@ -44,6 +45,11 @@ class Api::StudentsController < ApplicationController
   end
 
   private
+    #returns JSON error message
+    def error_response(exception)
+      render json: { message: exception.message }, status: :bad_request
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
@@ -51,6 +57,6 @@ class Api::StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.permit(:email)
+      params.require(:student).permit(:email)
     end
 end

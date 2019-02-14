@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2019_02_13_040804) do
 
   create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email"
-    t.boolean "is_suspended"
+    t.boolean "is_suspended", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_students_on_email", unique: true
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_02_13_040804) do
   create_table "students_teachers", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "student_id"
     t.bigint "teacher_id"
+    t.index ["student_id", "teacher_id"], name: "by_user_and_role", unique: true
     t.index ["student_id"], name: "index_students_teachers_on_student_id"
     t.index ["teacher_id"], name: "index_students_teachers_on_teacher_id"
   end

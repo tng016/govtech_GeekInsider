@@ -133,29 +133,23 @@ You should see a JSON of students
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+We will be using **RSPEC** for our tests.
+Test files are located at **./spec**
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
+To run the tests
 ```
-Give an example
+$ rspec
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 
 ## Possible Bugs
 
 ```
-/Library/Ruby/Gems/2.3.0/gems/bootsnap-1.4.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:21:in `require': dlopen(/Library/Ruby/Gems/2.3.0/gems/mysql2-0.5.2/lib/mysql2/mysql2.bundle, 0x0009): dependent dylib 'libssl.1.0.0.dylib' not found for '/Library/Ruby/Gems/2.3.0/gems/mysql2-0.5.2/lib/mysql2/mysql2.bundle' - /Library/Ruby/Gems/2.3.0/gems/mysql2-0.5.2/lib/mysql2/mysql2.bundle (LoadError)
+/Library/Ruby/Gems/2.3.0/gems/bootsnap-1.4.0/lib/bootsnap/load_path_cache/
+core_ext/kernel_require.rb:21:in `require': dlopen(/Library/Ruby/Gems/2.3.0/
+gems/mysql2-0.5.2/lib/mysql2/mysql2.bundle, 0x0009): dependent dylib
+'libssl.1.0.0.dylib' not found for '/Library/Ruby/Gems/2.3.0/gems/mysql2-0.5.2/
+lib/mysql2/mysql2.bundle' - /Library/Ruby/Gems/2.3.0/gems/mysql2-0.5.2/lib/
+mysql2/mysql2.bundle (LoadError)
 ```
 
 Check out [this stackoverflow page](https://stackoverflow.com/questions/51264240/rake-dbmigrate-error-with-mysql2-gem-library-not-loaded-libssl-1-0-0-dylib)

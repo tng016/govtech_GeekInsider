@@ -2,8 +2,6 @@ class Api::TeachersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_teacher, only: [:show, :update, :destroy]
   rescue_from Exception, :with => :error_response
-  # rescue_from ActiveRecord::RecordNotFound, with: :error_response
-  # rescue_from Mysql2::Error, with: :error_response
 
   # GET /teachers
   # GET /teachers.json
@@ -46,8 +44,11 @@ class Api::TeachersController < ApplicationController
   end
 
   def register
-    @teacher = Teacher.where(email: params[:teacher]).take
-    @students = Student.where(email: params[:students]).all
+    @teacher = Teacher.where(email: register_params[:teacher]).take
+    if @teacher.nil?
+      raise "Only one teacher email allowed, or no such teacher email found"
+    end
+    @students = Student.where(email: register_params[:students]).all
     @teacher.register_students(@students)
   end
 
@@ -58,13 +59,16 @@ class Api::TeachersController < ApplicationController
   end
 
   def suspend
-    @student = Student.where(email: params[:student]).take
+    @student = Student.where(email: suspend_params['student']).take
+    if @student.nil?
+      raise "Only one student email allowed, or no such teacher email found"
+    end
     @student.update_attribute(:is_suspended, 1)
   end
 
   def notifications
-    @teacher = Teacher.where(email: params[:teacher]).take
-    @receipients = @teacher.get_mailing_list(params[:notification])
+    @teacher = Teacher.where(email: notification_params[:teacher]).take
+    @receipients = @teacher.get_mailing_list(notification_params[:notification])
     render json: {:receipients => @receipients.collect{|receipient| receipient.email}}
   end
 
@@ -82,6 +86,18 @@ class Api::TeachersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
       params.require(:teacher).permit(:email)
+    end
+
+    def register_params
+      params.permit(:teacher,students:[])
+    end
+
+    def suspend_params
+      params.permit(:student)
+    end
+
+    def notification_params
+      params.permit(:teacher,:notification)
     end
 
     def collect_teachers_from_query_string
