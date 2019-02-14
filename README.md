@@ -57,7 +57,7 @@ click on that link above
 you should see a JSON with details of students I've seeded
 
 #### [BONUS] Your project is now online!
-Use (Postman)[https://www.getpostman.com/] to interact with the API
+Use [Postman](https://www.getpostman.com/) to interact with the API
 
 ## Getting Started - Option B: Local Deployment
 
@@ -150,10 +150,6 @@ Explain what these tests test and why
 ```
 Give an example
 ```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 
 ## Possible Bugs
