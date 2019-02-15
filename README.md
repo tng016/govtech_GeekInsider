@@ -2,7 +2,7 @@
 
 The coding assessment as part of GovTech's TAP first stage interview process
 
-## Getting Started - Option A: Cloud 9 IDE
+## Getting Started - Option A: Cloud 9 IDE **RECOMMENDED**
 
 ### Installing
 
@@ -63,11 +63,10 @@ Use [Postman](https://www.getpostman.com/) to interact with the API
 
 ### Prerequisites
 
-Here are some of the software specifications to this project:
+Here are some of the software specifications to this project: click [here](https://gorails.com/setup/osx/10.14-mojave) for a tutorial to install
 
 **Ruby**
 
-Click [here](https://rubyinstaller.org/downloads/) to download if needed
 ```
 $ ruby -v
 ruby 2.3.7p456
@@ -84,7 +83,11 @@ mysql> SELECT VERSION();
 | 8.0.15    |
 +-----------+
 ```
-Click [here](https://www.mysql.com/downloads/) to download if needed
+
+**For Apple Users - install XCode**
+
+**For Apple Users - install brew**
+
 
 **A good code editor of your choice**
 
