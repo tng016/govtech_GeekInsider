@@ -140,6 +140,7 @@ To run the tests
 ```
 $ rspec
 ```
+
 ## Design rationale:
 
 We are to design a school system that has students and teachers, and implement 4 APIs for the teachers' use.
