@@ -128,7 +128,14 @@ $ rails s
 #### 7) Open your internet browser to [http://localhost:3000/api/students/](http://localhost:3000/api/students/)
 You should see a JSON of students
 ```
-[{"id":1,"email":"studentjon@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":2,"email":"studenthon@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":3,"email":"commonstudent1@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":4,"email":"commonstudent2@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":5,"email":"studentmary@example.com","is_suspended":true,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:32:16.000Z"},{"id":6,"email":"studentbob@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":7,"email":"studentagnes@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},{"id":8,"email":"studentmiche@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"}]
+[{"id":1,"email":"studentjon@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},
+{"id":2,"email":"studenthon@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},
+{"id":3,"email":"commonstudent1@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},
+{"id":4,"email":"commonstudent2@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},
+{"id":5,"email":"studentmary@example.com","is_suspended":true,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:32:16.000Z"},
+{"id":6,"email":"studentbob@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},
+{"id":7,"email":"studentagnes@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"},
+{"id":8,"email":"studentmiche@example.com","is_suspended":false,"created_at":"2019-02-13T18:09:09.000Z","updated_at":"2019-02-13T18:09:09.000Z"}]
 ```
 
 ## Running the tests
@@ -141,7 +148,7 @@ To run the tests
 $ rspec
 ```
 
-## Design rationale:
+## Design rationale
 
 We are to design a school system that has students and teachers, and implement 4 APIs for the teachers' use.
 
