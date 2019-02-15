@@ -65,14 +65,14 @@ Use [Postman](https://www.getpostman.com/) to interact with the API
 
 Here are some of the software specifications to this project: click [here](https://gorails.com/setup/osx/10.14-mojave) for a tutorial to install
 
-**Ruby**
+**1) Ruby**
 
 ```
 $ ruby -v
 ruby 2.3.7p456
 ```
 
-**MySQL**
+**2) MySQL**
 
 Log into MySQL terminal
 ```
@@ -84,12 +84,15 @@ mysql> SELECT VERSION();
 +-----------+
 ```
 
-**For Apple Users - install XCode**
+**3) For Apple Users - install XCode command line tools**
 
-**For Apple Users - install brew**
+Allows you to install certain ruby gems
 
+**4)For Apple Users - install brew**
 
-**A good code editor of your choice**
+Brew is a package manager
+
+**5)A good code editor of your choice**
 
 Mine is [Atom](https://atom.io/)
 
