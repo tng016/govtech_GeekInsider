@@ -59,13 +59,48 @@ RSpec.describe Teacher, type: :model do
     let(:student2) {Student.create(email:"studentb@example.com")}
     let(:student3) {Student.create(email:"studentc@example.com")}
 
-    it "should be able to return all students from multiple teachers without duplicates" do
+    it "should return all students from multiple teachers without duplicates" do
       teacher1.students << student1
       teacher1.students << student2
       teacher2.students << student3
       teacher2.students << student2
       students = Teacher.get_all_students [teacher1,teacher2]
       expect(students).to eq [student1,student2,student3]
+    end
+
+    it "should return an empty string if teacher not passed as argument" do
+      teacher1.students << student1
+      teacher1.students << student2
+      teacher2.students << student3
+      teacher2.students << student2
+      students = Teacher.get_all_students []
+      expect(students).to eq []
+    end
+  end
+
+  context "get_mailing_list Function" do
+    let(:teacher1) { Teacher.create(email:"teacherken@example.com") }
+    let(:student1) {Student.create(email:"studenta@example.com")}
+    let(:student2) {Student.create(email:"studentb@example.com")}
+    let(:student3) {Student.create(email:"studentc@example.com")}
+    let(:student4) {Student.create(email:"studentd@example.com",is_suspended: true)}
+
+    it "should be able to return all students registered and tagged" do
+      teacher1.students << student1
+      teacher1.students << student2
+      student3
+      notification = "hello @"+student3.email
+      students = teacher1.get_mailing_list(notification)
+      expect(students).to eq [student1,student2,student3]
+    end
+
+    it "should not return a suspended student" do
+      teacher1.students << student1
+      teacher1.students << student2
+      teacher1.students << student4
+      notification = "hello @"+student4.email
+      students = teacher1.get_mailing_list(notification)
+      expect(students).to eq [student1,student2]
     end
   end
 

@@ -140,6 +140,22 @@ To run the tests
 ```
 $ rspec
 ```
+## Design rationale:
+
+We are to design a school system that has students and teachers, and implement 4 APIs for the teachers' use.
+
+#### Students and Teachers
+
+I first implemented simple CRUD methods on both the student and teacher classes. This was because the 4 APIs to design worked on existing students and teachers and it is only reasonable that there should be an existing portal to manage CRUD on these classes
+
+#### Associations
+
+I used the has_and_belongs_to_many association to associate the Teacher and Student classes. This was because there was no requirement to have any attributes attributed to this registration association. However, on hindsight, I probably should have used has_many_through which will allow me extensibility should I need to give attributes to this registration
+
+#### Suspension
+
+I used a boolean attribute under student to denote a suspension. This is principally because the suspension is an attribute of a student and not the association between student and teacher. Chose not to delete instance as it would be easier to un-suspend him later on
+
 
 ## Possible Bugs
 
